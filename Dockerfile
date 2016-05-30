@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y \
       vim
 
 RUN chmod -R 777 /tmp
+RUN chmod -R 777 /tmp-logstash
+RUN chown logstash: /tmp-logstash
+# RUN chown logstash:logstash /tmp-logstash
 
 RUN git clone -b v2 https://github.com/javifr/logstash-input-s3.git /opt/logstash-input-s3
 RUN git clone -b v2 https://github.com/javifr/logstash-output-s3csv /opt/logstash-output-s3csv
@@ -22,4 +25,5 @@ RUN echo "gem \"logstash-input-s3\", :path => \"/opt/logstash-input-s3\"" >> /op
 RUN logstash-plugin install --no-verify
 
 COPY config ./conf.d
+
 CMD ["logstash","agent","-f","/etc/logstash/conf.d/"]
