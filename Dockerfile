@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
       vim
 
 RUN chmod -R 777 /tmp
+RUN mkdir /tmp-logstash
 RUN chmod -R 777 /tmp-logstash
 RUN chown logstash: /tmp-logstash
 # RUN chown logstash:logstash /tmp-logstash
